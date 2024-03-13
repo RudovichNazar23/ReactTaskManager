@@ -1,12 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Task from "./Task";
 import NewTaskForm from "./NewTaskForm";
 
-import initialState from "../initialState";
+import getInitialState from "../getInitialState";
 
 function TaskList() {
-    const [tasks, setTasks] = useState(initialState);
+    const [tasks, setTasks] = useState(getInitialState);
+
+    useEffect(
+        () => {
+            localStorage.setItem("task-manager-items-list", JSON.stringify(tasks));
+        }, [tasks]
+    );
 
     const addTask = (title) => setTasks(
         (oldTasks) => oldTasks.concat([{"id": Math.random() * 1000, "title": title}])
