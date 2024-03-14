@@ -15,7 +15,7 @@ function TaskList() {
     );
 
     const addTask = (title) => setTasks(
-        (oldTasks) => oldTasks.concat([{"id": Math.random() * 1000, "title": title}])
+        (oldTasks) => oldTasks.concat([{"id": Math.random() * 1000, "title": title, "steps": []}])
     );
 
     const editTask = (id, title) => setTasks(
