@@ -17,9 +17,18 @@ function TaskSteps({ task, showSteps, setTasks }){
         steps = steps.filter((oldStep) => oldStep.id !== stepId);
         setTasks(
             (oldTasks) => oldTasks.map(
-                (oldTask) => oldTask.id === task.id ? {...oldTask, steps} : task
+                (oldTask) => oldTask.id === task.id ? {...task, steps} : oldTask
             )
         )
+    };
+
+    const updateStep = (stepId, title) => {
+        steps = steps.map((oldStep) => oldStep.id === stepId ? {...oldStep, title} : oldStep);
+        setTasks(
+            (oldTasks) => oldTasks.map(
+                (oldTask) => oldTask.id === task.id ? {...task, steps} : oldTask
+            )
+        );
     };
 
     return (
@@ -32,7 +41,7 @@ function TaskSteps({ task, showSteps, setTasks }){
                             steps.map(
                                 (step) => {
                                     return (
-                                        <TaskStep step={step} key={step.id} deleteStep={deleteStep}/>
+                                        <TaskStep step={step} key={step.id} deleteStep={deleteStep} updateStep={updateStep}/>
                                     )
                                 }
                             )

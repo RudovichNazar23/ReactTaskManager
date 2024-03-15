@@ -29,7 +29,7 @@ function TaskList() {
     );  
 
     return (
-        <div className="container d-flex flex-column align-items-center">
+        <div className="container d-flex flex-column align-items-center justify-content-between">
             {
                 tasks && (
                     tasks.map(
