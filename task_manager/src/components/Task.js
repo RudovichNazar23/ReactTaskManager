@@ -5,7 +5,7 @@ import TaskSteps from "./TaskSteps";
 import ShowStepsButton from "./ShowStepsButton";
 
 
-function Task({ task, editTask, deleteTask }){
+function Task({ task, editTask, deleteTask, setTasks }){
     const [isEditable, setIsEditable] = useState(false);
     const [showSteps, setShowSteps] = useState(false);
 
@@ -25,7 +25,7 @@ function Task({ task, editTask, deleteTask }){
                 <ShowStepsButton onClick={showTaskSteps} showSteps={showSteps} />
                 <TaskHeader task={task} isEditable={isEditable} setIsEditable={setIsEditable} editTask={editTask}/>
             </div>
-            <TaskSteps showSteps={showSteps} task={task} />
+            <TaskSteps showSteps={showSteps} task={task} setTasks={setTasks}/>
             <div className="d-flex flex-row align-self-end justify-content-end" style={{width: 200, float: "right"}}>
                 <a href="#" className="m-2" onClick={() => setIsEditable(() => !isEditable)}>Edit</a>
                 <a href="#" className="m-2" onClick={onDeleteTask}>Delete</a>

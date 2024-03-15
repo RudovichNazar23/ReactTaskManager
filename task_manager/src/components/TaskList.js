@@ -33,7 +33,7 @@ function TaskList() {
             {
                 tasks && (
                     tasks.map(
-                        (task) => <Task key={task.id} task={task} editTask={editTask} deleteTask={deleteTask}/>
+                        (task) => <Task key={task.id} task={task} editTask={editTask} deleteTask={deleteTask} setTasks={setTasks}/>
                     )
                 )
             }
