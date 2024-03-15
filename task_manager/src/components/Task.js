@@ -20,7 +20,7 @@ function Task({ task, editTask, deleteTask, setTasks }){
     };
 
     return (
-        <div className="card p-3" style={{width: 600}}>
+        <div className="card p-3 m-1" style={{width: 600}}>
             <div className="d-flex flex-row">
                 <ShowStepsButton onClick={showTaskSteps} showSteps={showSteps} />
                 <TaskHeader task={task} isEditable={isEditable} setIsEditable={setIsEditable} editTask={editTask}/>
