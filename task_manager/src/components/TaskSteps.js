@@ -1,7 +1,27 @@
 import AddStepForm from "./AddStepForm";
+import TaskStep from "./TaskStep";
 
-function TaskSteps({ task, showSteps }){
-    const { steps } = task;
+function TaskSteps({ task, showSteps, setTasks }){
+    let { steps } = task;
+
+    const addStep = (stepTitle) => {
+        const newTaskSteps = steps.push({"id": Math.random() * 1000, "title": stepTitle});
+        setTasks(
+            (oldTasks) => oldTasks.map(
+                (oldTask) => oldTask.id === task.id ? {...task, newTaskSteps} : oldTask
+            )
+        )
+    };
+
+    const deleteStep = (stepId) => {
+        steps = steps.filter((oldStep) => oldStep.id !== stepId);
+        setTasks(
+            (oldTasks) => oldTasks.map(
+                (oldTask) => oldTask.id === task.id ? {...oldTask, steps} : task
+            )
+        )
+    };
+
     return (
         showSteps && (
             <div className="container d-flex flex-column">
@@ -12,9 +32,7 @@ function TaskSteps({ task, showSteps }){
                             steps.map(
                                 (step) => {
                                     return (
-                                        <div key={step.id} className="m-1 p-2" style={{backgroundColor: "whitesmoke", width: 500}}>
-                                            {step.title}
-                                        </div>
+                                        <TaskStep step={step} key={step.id} deleteStep={deleteStep}/>
                                     )
                                 }
                             )
@@ -22,7 +40,7 @@ function TaskSteps({ task, showSteps }){
                     }
                 </div>
                 <div className="container m-1">
-                    <AddStepForm task={task}/>
+                    <AddStepForm addStep={addStep}/>
                 </div>
             </div>
         )
