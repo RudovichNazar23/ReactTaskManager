@@ -5,10 +5,10 @@ function TaskSteps({ task, showSteps, setTasks }){
     let { steps } = task;
 
     const addStep = (stepTitle) => {
-        const newTaskSteps = steps.push({"id": Math.random() * 1000, "title": stepTitle});
+        steps.push({"id": Math.random() * 1000, "title": stepTitle, "isDone": false});
         setTasks(
             (oldTasks) => oldTasks.map(
-                (oldTask) => oldTask.id === task.id ? {...task, newTaskSteps} : oldTask
+                (oldTask) => oldTask.id === task.id ? {...task, steps} : oldTask
             )
         )
     };
@@ -31,6 +31,15 @@ function TaskSteps({ task, showSteps, setTasks }){
         );
     };
 
+    const setStepIsDone = (step, isDone) => {
+        steps = steps.map((oldStep) => oldStep.id === step.id ? {...oldStep, isDone} : oldStep);
+        setTasks(
+            (oldTasks) => oldTasks.map(
+                (oldTask) => oldTask.id === task.id ? {...task, steps} : oldTask
+            )
+        );
+    };
+
     return (
         showSteps && (
             <div className="container d-flex flex-column">
@@ -41,7 +50,12 @@ function TaskSteps({ task, showSteps, setTasks }){
                             steps.map(
                                 (step) => {
                                     return (
-                                        <TaskStep step={step} key={step.id} deleteStep={deleteStep} updateStep={updateStep}/>
+                                        <TaskStep step={step} 
+                                                  key={step.id} 
+                                                  deleteStep={deleteStep} 
+                                                  updateStep={updateStep}
+                                                  setStepIsDone={setStepIsDone}
+                                        />
                                     )
                                 }
                             )
