@@ -3,7 +3,7 @@ import { useState } from "react";
 import EditStepForm from "./EditStepForm";
 import StepButton from "./StepButton";
 
-function TaskStep({ step, deleteStep, updateStep, setStepIsDone, moveStepBack }){
+function TaskStep({ step, deleteStep, updateStep, setStepIsDone, moveStepBack, moveStepForward }){
     const [showEditStepForm, setEditStepForm] = useState(false);
 
     const { isDone } = step;
@@ -20,6 +20,11 @@ function TaskStep({ step, deleteStep, updateStep, setStepIsDone, moveStepBack })
     const onMoveStepBack = (event) => {
         event.preventDefault();
         moveStepBack(step);
+    };
+
+    const onMoveStepForward = (event) => {
+        event.preventDefault();
+        moveStepForward(step);
     };
 
     return (
@@ -39,7 +44,7 @@ function TaskStep({ step, deleteStep, updateStep, setStepIsDone, moveStepBack })
             }
             <div>
                 <StepButton icon={"/upload.png"} onCLick={onMoveStepBack}/>
-                <StepButton icon={"/down-chevron.png"}/>
+                <StepButton icon={"/down-chevron.png"} onCLick={onMoveStepForward}/>
                 <StepButton icon={"/delete.png"} onCLick={onDeleteStep}/>
                 <StepButton icon={"/pencil.png"} onCLick={() => setEditStepForm(!showEditStepForm)}/>
             </div>
