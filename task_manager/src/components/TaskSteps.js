@@ -40,6 +40,23 @@ function TaskSteps({ task, showSteps, setTasks }){
         );
     };
 
+    const moveStepBack = (step) => {
+        const currentStepIndex = steps.indexOf(step);
+        if(currentStepIndex === 0) return;
+        
+        const previousStep = steps[currentStepIndex - 1];
+        const previousStepIndex = steps.indexOf(previousStep);
+        steps[previousStepIndex] = step;
+        steps[currentStepIndex] = previousStep;
+
+
+        setTasks(
+            (oldTasks) => oldTasks.map(
+                (oldTask) => oldTask.id === task.id ? {...task, steps} : oldTask
+            )
+        );
+    };  
+
     return (
         showSteps && (
             <div className="container d-flex flex-column">
@@ -55,6 +72,7 @@ function TaskSteps({ task, showSteps, setTasks }){
                                                   deleteStep={deleteStep} 
                                                   updateStep={updateStep}
                                                   setStepIsDone={setStepIsDone}
+                                                  moveStepBack={moveStepBack}
                                         />
                                     )
                                 }
