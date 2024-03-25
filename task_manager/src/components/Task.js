@@ -4,6 +4,7 @@ import TaskHeader from "./TaskHeader";
 import TaskSteps from "./TaskSteps";
 import ShowStepsButton from "./ShowStepsButton";
 import StepProgress from "./StepProgress";
+import StepStripe from "./StepStripe";
 
 
 function Task({ task, editTask, deleteTask, setTasks }){
@@ -36,6 +37,7 @@ function Task({ task, editTask, deleteTask, setTasks }){
                 <a href="#" className="m-2" onClick={onDeleteTask}>Delete</a>
             </div>
             <TaskSteps showSteps={showSteps} task={task} setTasks={setTasks}/>
+            <StepStripe task={task} />
         </div>
     );
 };
